@@ -1,0 +1,29 @@
+{
+  "name": "@rapid-prototyping-bo/design-system",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./button": "./src/button.tsx",
+    "./card": "./src/card.tsx"
+  },
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "lint": "tsc --noEmit",
+    "test": "tsx --test src/__checks__/render.test.tsx",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": "19.2.7"
+  },
+  "devDependencies": {
+    "@types/node": "26.0.1",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "tsx": "4.22.4",
+    "typescript": "6.0.3"
+  }
+}
