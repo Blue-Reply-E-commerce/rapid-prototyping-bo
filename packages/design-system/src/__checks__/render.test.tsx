@@ -14,13 +14,13 @@ import {
 test("Button renders shared operational variants", () => {
   const markup = renderToStaticMarkup(
     <Button size="sm" variant="secondary">
-      Review queue
+      Filter orders
     </Button>
   );
 
   assert.match(markup, /data-slot="button"/);
   assert.match(markup, /border-line/);
-  assert.match(markup, /Review queue/);
+  assert.match(markup, /Filter orders/);
 });
 
 test("Card renders shared structure slots", () => {

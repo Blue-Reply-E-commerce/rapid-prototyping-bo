@@ -10,4 +10,4 @@ Mock-only backoffice prototype workspace managed with pnpm and Turborepo.
 - `pnpm test` runs the mock-only preview build as the current smoke verification.
 - `pnpm typecheck` runs TypeScript checks.
 
-The first application lives in `apps/rapid-prototyping-bo` and renders a dashboard that does not require production secrets, VPN access, live backend credentials, or real customer data.
+The first application lives in `apps/rapid-prototyping-bo` and renders a mock-only, read-only Order History dashboard that does not require production secrets, VPN access, live backend credentials, or real customer data.

@@ -23,6 +23,12 @@ The API client package owns frontend-backend contracts for the PoC.
 
 - The initial dashboard contract is exported from `@rapid-prototyping-bo/api-client`.
 - Dashboard mock fixtures are exported from `@rapid-prototyping-bo/api-client/mocks/dashboard`.
+- The first dashboard models a read-only Order History surface, not a prototype work queue.
+- The success payload exposes `orderSummary`, `orderFilters`, and `orders`.
+- `orders[]` contains `id`, `title`, `description`, `status`, `totalAmount`, `submittedAt`, and `updatedAt`.
+- `totalAmount` uses `amountMinor` plus a three-letter currency code; do not model money as floating-point `price`.
+- The initial order model does not include customer identity, line items, or operational actions.
+- Simple filtering is limited to order status and text search.
 - Mock fixtures must be parsed with the Zod response schemas before the app renders them.
 - `getDashboardData` in the app should consume validated dashboard payloads, not raw fixture objects.
 
@@ -32,7 +38,7 @@ When v0 introduces a UI need that requires new backend data, it must update the 
 
 Examples:
 
-- New field in a dashboard card response.
+- New field in an order history row.
 - New filter input required by a list page.
 - New status enum shown in the UI.
 

@@ -2,38 +2,53 @@ import { z } from "zod";
 
 const NonEmptyStringSchema = z.string().min(1);
 
-export const DashboardQueueStatusSchema = z.enum([
-  "prototype",
-  "review",
-  "ready",
-  "blocked"
+export const OrderStatusSchema = z.enum([
+  "submitted",
+  "processing",
+  "completed",
+  "cancelled",
+  "failed"
 ]);
 
-export const DashboardDeliveryImpactSchema = z.enum([
-  "ui-only",
-  "contract-change",
-  "jira-draft",
-  "backend-follow-up"
-]);
+export const CurrencyCodeSchema = z.string().regex(/^[A-Z]{3}$/);
 
-export const DashboardSummaryCardSchema = z
+export const OrderTotalSchema = z
   .object({
-    id: NonEmptyStringSchema,
-    label: NonEmptyStringSchema,
-    value: NonEmptyStringSchema,
-    detail: NonEmptyStringSchema
+    amountMinor: z.number().int().nonnegative(),
+    currency: CurrencyCodeSchema
   })
   .strict();
 
-export const DashboardWorkQueueItemSchema = z
+export const DashboardOrderSchema = z
   .object({
     id: NonEmptyStringSchema,
-    item: NonEmptyStringSchema,
-    owner: NonEmptyStringSchema,
-    status: DashboardQueueStatusSchema,
-    statusLabel: NonEmptyStringSchema,
-    impact: DashboardDeliveryImpactSchema,
-    impactLabel: NonEmptyStringSchema
+    title: NonEmptyStringSchema,
+    description: NonEmptyStringSchema,
+    status: OrderStatusSchema,
+    totalAmount: OrderTotalSchema,
+    submittedAt: z.string().datetime(),
+    updatedAt: z.string().datetime()
+  })
+  .strict();
+
+export const DashboardOrderSummarySchema = z
+  .object({
+    totalOrders: z.number().int().nonnegative(),
+    processingOrders: z.number().int().nonnegative(),
+    exceptionOrders: z.number().int().nonnegative()
+  })
+  .strict();
+
+export const DashboardOrderFiltersSchema = z
+  .object({
+    statusOptions: z.array(OrderStatusSchema)
+  })
+  .strict();
+
+export const DashboardOrderHistoryQuerySchema = z
+  .object({
+    status: OrderStatusSchema.optional(),
+    search: z.string().optional()
   })
   .strict();
 
@@ -65,8 +80,9 @@ export const DashboardSuccessResponseSchema = z
     kind: z.literal("success"),
     generatedAt: z.string().datetime(),
     preview: DashboardPreviewModeSchema,
-    summaryCards: z.array(DashboardSummaryCardSchema),
-    workQueue: z.array(DashboardWorkQueueItemSchema),
+    orderSummary: DashboardOrderSummarySchema,
+    orderFilters: DashboardOrderFiltersSchema,
+    orders: z.array(DashboardOrderSchema),
     previewGuarantees: z.array(DashboardPreviewGuaranteeSchema),
     backendExpectations: z.array(DashboardBackendExpectationSchema)
   })
@@ -91,10 +107,15 @@ export const DashboardResponseSchema = z.discriminatedUnion("kind", [
   DashboardErrorResponseSchema
 ]);
 
-export type DashboardQueueStatus = z.infer<typeof DashboardQueueStatusSchema>;
-export type DashboardDeliveryImpact = z.infer<typeof DashboardDeliveryImpactSchema>;
-export type DashboardSummaryCard = z.infer<typeof DashboardSummaryCardSchema>;
-export type DashboardWorkQueueItem = z.infer<typeof DashboardWorkQueueItemSchema>;
+export type OrderStatus = z.infer<typeof OrderStatusSchema>;
+export type CurrencyCode = z.infer<typeof CurrencyCodeSchema>;
+export type OrderTotal = z.infer<typeof OrderTotalSchema>;
+export type DashboardOrder = z.infer<typeof DashboardOrderSchema>;
+export type DashboardOrderSummary = z.infer<typeof DashboardOrderSummarySchema>;
+export type DashboardOrderFilters = z.infer<typeof DashboardOrderFiltersSchema>;
+export type DashboardOrderHistoryQuery = z.infer<
+  typeof DashboardOrderHistoryQuerySchema
+>;
 export type DashboardPreviewMode = z.infer<typeof DashboardPreviewModeSchema>;
 export type DashboardPreviewGuarantee = z.infer<typeof DashboardPreviewGuaranteeSchema>;
 export type DashboardBackendExpectation = z.infer<

@@ -10,7 +10,7 @@ The team wants to validate a workflow where v0 can generate UI changes against a
 
 Build a minimal monorepo for `Rapid Prototyping BO` using Turborepo and pnpm. The first application is a small Next.js 16 backoffice with Tailwind CSS, Zustand for client state, and a minimal design system based on shadcn/ui-style primitives.
 
-The first product surface is a simple dashboard. The app should be intentionally small, but structured as if it will grow into a real backoffice: shared packages, design-system primitives, typed API contracts, deterministic mock payloads, and AI context documentation for v0.
+The first product surface is a read-only Order History dashboard with lightweight KPIs, simple status/text filters, and generic order rows. The app should be intentionally small, but structured as if it will grow into a real backoffice: shared packages, design-system primitives, typed API contracts, deterministic mock payloads, and AI context documentation for v0.
 
 v0 will operate on the GitHub repository directly during the PoC. Vercel previews must remain mock-only. Approved v0 output becomes a handoff PR. Jira integration will create a parent delivery story and FE/BE sub-tasks through a constrained MCP workflow.
 
@@ -54,7 +54,7 @@ v0 will operate on the GitHub repository directly during the PoC. Vercel preview
 ## Testing Decisions
 
 - Prefer tests at user-visible seams rather than implementation details.
-- Validate that the dashboard renders from deterministic mock data.
+- Validate that the Order History dashboard renders from deterministic mock data.
 - Validate that Button and Card render consistently through the design-system package.
 - Validate that Zustand state is used only for client UI state, not backend-derived source-of-truth data.
 - Validate that mock payloads conform to typed API contracts.
@@ -78,4 +78,4 @@ v0 will operate on the GitHub repository directly during the PoC. Vercel preview
 - The PoC should use native v0 workspace capabilities first.
 - The design system should be represented as a v0 Design System Skill so v0 uses project-approved components and tokens.
 - The app should remain small enough to inspect manually, but structured enough to prove the intended delivery workflow.
-- The first feature surface is a simple dashboard.
+- The first feature surface is a read-only Order History dashboard.

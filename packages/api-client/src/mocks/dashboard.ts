@@ -1,9 +1,9 @@
 import {
   parseDashboardErrorResponse,
   parseDashboardSuccessResponse,
-  type DashboardDeliveryImpact,
-  type DashboardQueueStatus,
-  type DashboardSuccessResponse
+  type DashboardOrder,
+  type DashboardSuccessResponse,
+  type OrderStatus
 } from "../dashboard";
 
 const generatedAt = "2026-01-15T09:00:00.000Z";
@@ -13,10 +13,18 @@ const preview = {
   description: "No secrets, VPN, production credentials, live backend, or real customer data required."
 } as const;
 
+const statusOptions = [
+  "submitted",
+  "processing",
+  "completed",
+  "cancelled",
+  "failed"
+] as const satisfies ReadonlyArray<OrderStatus>;
+
 const previewGuarantees: DashboardSuccessResponse["previewGuarantees"] = [
   {
     id: "deterministic-content",
-    label: "Deterministic local dashboard content."
+    label: "Deterministic local order history content."
   },
   {
     id: "no-production-api",
@@ -34,216 +42,173 @@ const previewGuarantees: DashboardSuccessResponse["previewGuarantees"] = [
 
 const currentBackendExpectations: DashboardSuccessResponse["backendExpectations"] = [
   {
-    id: "summary-card-shape",
-    fieldPath: "summaryCards[].{label,value,detail}",
-    reason: "Dashboard cards render operational totals and review hints.",
+    id: "order-summary-shape",
+    fieldPath: "orderSummary.{totalOrders,processingOrders,exceptionOrders}",
+    reason: "The dashboard renders a small set of order history KPIs.",
     backendTaskRequired: false
   },
   {
-    id: "work-queue-shape",
-    fieldPath: "workQueue[].{item,owner,status,statusLabel,impact,impactLabel}",
-    reason: "The dashboard table needs ownership, workflow state, and delivery impact.",
+    id: "order-history-shape",
+    fieldPath:
+      "orders[].{id,title,description,status,totalAmount,submittedAt,updatedAt}",
+    reason:
+      "The dashboard table needs read-only order history rows with a single monetary total.",
+    backendTaskRequired: false
+  },
+  {
+    id: "order-filter-shape",
+    fieldPath: "orderFilters.statusOptions",
+    reason: "The dashboard supports simple status filtering over order history.",
     backendTaskRequired: false
   }
 ];
 
-export const dashboardHappyPathFixture = parseDashboardSuccessResponse({
-  kind: "success",
-  generatedAt,
-  preview,
-  summaryCards: [
-    {
-      id: "prototype-requests",
-      label: "Prototype requests",
-      value: "12",
-      detail: "4 ready for review"
-    },
-    {
-      id: "open-handoff-prs",
-      label: "Open handoff PRs",
-      value: "3",
-      detail: "2 awaiting FE review"
-    },
-    {
-      id: "contract-changes",
-      label: "Contract changes",
-      value: "5",
-      detail: "1 needs backend task"
-    },
-    {
-      id: "preview-health",
-      label: "Preview health",
-      value: "100%",
-      detail: "Mock runtime available"
-    }
-  ],
-  workQueue: [
-    {
-      id: "dashboard-filters",
-      item: "Dashboard filters",
-      owner: "Frontend",
-      status: "prototype",
-      statusLabel: "Prototype",
-      impact: "ui-only",
-      impactLabel: "UI only"
-    },
-    {
-      id: "order-detail-summary",
-      item: "Order detail summary",
-      owner: "Product",
-      status: "review",
-      statusLabel: "Review",
-      impact: "contract-change",
-      impactLabel: "Contract change"
-    },
-    {
-      id: "delivery-story-handoff",
-      item: "Delivery story handoff",
-      owner: "Delivery",
-      status: "ready",
-      statusLabel: "Ready",
-      impact: "jira-draft",
-      impactLabel: "Jira draft"
-    }
-  ],
-  previewGuarantees,
-  backendExpectations: currentBackendExpectations
-} satisfies DashboardSuccessResponse);
-
-export const dashboardEmptyStateFixture = parseDashboardSuccessResponse({
-  kind: "success",
-  generatedAt,
-  preview,
-  summaryCards: [
-    {
-      id: "prototype-requests",
-      label: "Prototype requests",
-      value: "0",
-      detail: "No active prototype requests"
-    },
-    {
-      id: "open-handoff-prs",
-      label: "Open handoff PRs",
-      value: "0",
-      detail: "No handoff PRs waiting"
-    },
-    {
-      id: "contract-changes",
-      label: "Contract changes",
-      value: "0",
-      detail: "No backend impact logged"
-    },
-    {
-      id: "preview-health",
-      label: "Preview health",
-      value: "100%",
-      detail: "Mock runtime available"
-    }
-  ],
-  workQueue: [],
-  previewGuarantees,
-  backendExpectations: currentBackendExpectations
-} satisfies DashboardSuccessResponse);
-
-const statusCycle = [
+const happyPathOrders = [
   {
-    status: "prototype",
-    statusLabel: "Prototype"
+    id: "ORD-10042",
+    title: "Workspace equipment renewal",
+    description: "Replacement order for shared workspace devices.",
+    status: "processing",
+    totalAmount: {
+      amountMinor: 124050,
+      currency: "EUR"
+    },
+    submittedAt: "2026-01-10T08:15:00.000Z",
+    updatedAt: "2026-01-15T09:40:00.000Z"
   },
   {
-    status: "review",
-    statusLabel: "Review"
+    id: "ORD-10043",
+    title: "Content review package",
+    description: "Editorial preparation order for a regional launch.",
+    status: "completed",
+    totalAmount: {
+      amountMinor: 84500,
+      currency: "EUR"
+    },
+    submittedAt: "2026-01-09T10:30:00.000Z",
+    updatedAt: "2026-01-13T16:20:00.000Z"
   },
   {
-    status: "ready",
-    statusLabel: "Ready"
+    id: "ORD-10044",
+    title: "Regional launch checklist",
+    description: "Operational readiness order for launch activities.",
+    status: "submitted",
+    totalAmount: {
+      amountMinor: 230000,
+      currency: "EUR"
+    },
+    submittedAt: "2026-01-14T14:05:00.000Z",
+    updatedAt: "2026-01-14T14:05:00.000Z"
   },
   {
-    status: "blocked",
-    statusLabel: "Blocked"
+    id: "ORD-10045",
+    title: "Access recovery request",
+    description: "Support order blocked by a downstream validation error.",
+    status: "failed",
+    totalAmount: {
+      amountMinor: 12000,
+      currency: "EUR"
+    },
+    submittedAt: "2026-01-08T09:45:00.000Z",
+    updatedAt: "2026-01-12T11:10:00.000Z"
+  },
+  {
+    id: "ORD-10046",
+    title: "Training material refresh",
+    description: "Cancelled order for updating internal training assets.",
+    status: "cancelled",
+    totalAmount: {
+      amountMinor: 64000,
+      currency: "EUR"
+    },
+    submittedAt: "2026-01-07T12:00:00.000Z",
+    updatedAt: "2026-01-11T15:25:00.000Z"
+  },
+  {
+    id: "ORD-10047",
+    title: "Integration readiness audit",
+    description: "Review order for operational integration readiness.",
+    status: "completed",
+    totalAmount: {
+      amountMinor: 310500,
+      currency: "EUR"
+    },
+    submittedAt: "2026-01-06T07:50:00.000Z",
+    updatedAt: "2026-01-10T13:35:00.000Z"
   }
-] as const satisfies ReadonlyArray<{
-  status: DashboardQueueStatus;
-  statusLabel: string;
-}>;
+] as const satisfies ReadonlyArray<DashboardOrder>;
 
-const impactCycle = [
-  {
-    impact: "ui-only",
-    impactLabel: "UI only"
-  },
-  {
-    impact: "contract-change",
-    impactLabel: "Contract change"
-  },
-  {
-    impact: "jira-draft",
-    impactLabel: "Jira draft"
-  },
-  {
-    impact: "backend-follow-up",
-    impactLabel: "Backend follow-up"
-  }
-] as const satisfies ReadonlyArray<{
-  impact: DashboardDeliveryImpact;
-  impactLabel: string;
-}>;
+function createOrderSummary(
+  orders: ReadonlyArray<DashboardOrder>
+): DashboardSuccessResponse["orderSummary"] {
+  return {
+    totalOrders: orders.length,
+    processingOrders: orders.filter((order) => order.status === "processing").length,
+    exceptionOrders: orders.filter((order) =>
+      order.status === "cancelled" || order.status === "failed"
+    ).length
+  };
+}
 
-const ownerCycle = ["Frontend", "Product", "Delivery", "Backend"] as const;
+function createDashboardSuccessResponse(
+  orders: ReadonlyArray<DashboardOrder>
+): DashboardSuccessResponse {
+  return parseDashboardSuccessResponse({
+    kind: "success",
+    generatedAt,
+    preview,
+    orderSummary: createOrderSummary(orders),
+    orderFilters: {
+      statusOptions: [...statusOptions]
+    },
+    orders: [...orders],
+    previewGuarantees,
+    backendExpectations: currentBackendExpectations
+  } satisfies DashboardSuccessResponse);
+}
 
-function createLargeWorkQueue(): DashboardSuccessResponse["workQueue"] {
+export const dashboardHappyPathFixture =
+  createDashboardSuccessResponse(happyPathOrders);
+
+export const dashboardEmptyStateFixture = createDashboardSuccessResponse([]);
+
+const generatedOrderTitles = [
+  "Operational readiness review",
+  "Workspace access package",
+  "Policy acknowledgement batch",
+  "Regional enablement order",
+  "Service validation request",
+  "Internal asset renewal"
+] as const;
+
+function createLargeOrderHistory(): DashboardSuccessResponse["orders"] {
   return Array.from({ length: 32 }, (_, index) => {
     const ordinal = index + 1;
-    const status = statusCycle[index % statusCycle.length] ?? statusCycle[0];
-    const impact = impactCycle[index % impactCycle.length] ?? impactCycle[0];
-    const owner = ownerCycle[index % ownerCycle.length] ?? ownerCycle[0];
+    const status = statusOptions[index % statusOptions.length] ?? "submitted";
+    const title =
+      generatedOrderTitles[index % generatedOrderTitles.length] ??
+      generatedOrderTitles[0];
+    const submittedDay = String((index % 20) + 1).padStart(2, "0");
+    const updatedDay = String((index % 20) + 2).padStart(2, "0");
 
     return {
-      id: `large-prototype-${ordinal}`,
-      item: `Generated prototype change ${ordinal}`,
-      owner,
-      status: status.status,
-      statusLabel: status.statusLabel,
-      impact: impact.impact,
-      impactLabel: impact.impactLabel
+      id: `ORD-${String(20000 + ordinal)}`,
+      title: `${title} ${ordinal}`,
+      description: `Generated read-only order history row ${ordinal}.`,
+      status,
+      totalAmount: {
+        amountMinor: 50000 + ordinal * 7250,
+        currency: "EUR"
+      },
+      submittedAt: `2026-01-${submittedDay}T09:00:00.000Z`,
+      updatedAt: `2026-01-${updatedDay}T10:30:00.000Z`
     };
   });
 }
 
-export const dashboardLargeDataFixture = parseDashboardSuccessResponse({
-  kind: "success",
-  generatedAt,
-  preview,
-  summaryCards: [
-    {
-      id: "prototype-requests",
-      label: "Prototype requests",
-      value: "128",
-      detail: "32 active queue items"
-    },
-    {
-      id: "open-handoff-prs",
-      label: "Open handoff PRs",
-      value: "24",
-      detail: "8 awaiting FE review"
-    },
-    {
-      id: "contract-changes",
-      label: "Contract changes",
-      value: "19",
-      detail: "6 need backend tasks"
-    },
-    {
-      id: "preview-health",
-      label: "Preview health",
-      value: "100%",
-      detail: "Mock runtime available"
-    }
-  ],
-  workQueue: createLargeWorkQueue(),
-  previewGuarantees,
-  backendExpectations: currentBackendExpectations
-} satisfies DashboardSuccessResponse);
+export const dashboardLargeDataFixture = createDashboardSuccessResponse(
+  createLargeOrderHistory()
+);
 
 export const dashboardErrorFixture = parseDashboardErrorResponse({
   kind: "error",

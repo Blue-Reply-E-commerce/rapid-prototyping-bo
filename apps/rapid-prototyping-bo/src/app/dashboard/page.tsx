@@ -1,5 +1,4 @@
 import {
-  Button,
   Card,
   CardContent,
   CardDescription,
@@ -7,10 +6,30 @@ import {
   CardTitle
 } from "@rapid-prototyping-bo/design-system";
 import { getDashboardData } from "@/lib/dashboard-data";
-import { DashboardQueuePanel } from "./dashboard-queue-panel";
+import { OrderHistoryPanel } from "./order-history-panel";
 
 export default async function DashboardPage() {
   const dashboard = await getDashboardData();
+  const summaryCards = [
+    {
+      id: "total-orders",
+      label: "Total orders",
+      value: dashboard.orderSummary.totalOrders.toString(),
+      detail: "Available in order history"
+    },
+    {
+      id: "processing-orders",
+      label: "Processing",
+      value: dashboard.orderSummary.processingOrders.toString(),
+      detail: "Currently in progress"
+    },
+    {
+      id: "exception-orders",
+      label: "Exceptions",
+      value: dashboard.orderSummary.exceptionOrders.toString(),
+      detail: "Cancelled or failed"
+    }
+  ];
 
   return (
     <main className="min-h-screen bg-canvas text-ink">
@@ -37,10 +56,10 @@ export default async function DashboardPage() {
               Dashboard
             </a>
             <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
-              Contracts
+              Orders
             </span>
             <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
-              Handoffs
+              Settings
             </span>
           </nav>
         </aside>
@@ -49,7 +68,7 @@ export default async function DashboardPage() {
           <header className="flex flex-col gap-4 border-b border-line pb-5 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm font-medium text-muted">Dashboard</p>
-              <h2 className="mt-1 text-2xl font-semibold">Prototype operations</h2>
+              <h2 className="mt-1 text-2xl font-semibold">Order history</h2>
             </div>
             <div className="flex flex-col gap-3 md:items-end">
               <Card className="w-full md:w-[420px]">
@@ -62,20 +81,17 @@ export default async function DashboardPage() {
                   </p>
                 </CardContent>
               </Card>
-              <div className="flex flex-wrap gap-2">
-                <Button size="sm" variant="secondary">
-                  Review queue
-                </Button>
-                <Button size="sm">Create handoff</Button>
-              </div>
+              <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
+                Read-only
+              </span>
             </div>
           </header>
 
           <section
             aria-label="Summary"
-            className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+            className="mt-6 grid gap-4 sm:grid-cols-3"
           >
-            {dashboard.summaryCards.map((card) => (
+            {summaryCards.map((card) => (
               <Card key={card.id}>
                 <CardContent>
                   <p className="text-sm font-medium text-muted">{card.label}</p>
@@ -87,7 +103,10 @@ export default async function DashboardPage() {
           </section>
 
           <section className="mt-6 grid gap-6 xl:grid-cols-[1fr_320px]">
-            <DashboardQueuePanel workQueue={dashboard.workQueue} />
+            <OrderHistoryPanel
+              orderFilters={dashboard.orderFilters}
+              orders={dashboard.orders}
+            />
 
             <Card as="aside">
               <CardHeader>

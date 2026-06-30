@@ -32,8 +32,9 @@ Do not use Next.js proxy/middleware as the main mock implementation layer.
 
 ## Current Dashboard Runtime
 
-- The dashboard consumes the validated happy-path fixture through `apps/rapid-prototyping-bo/src/lib/dashboard-data.ts`.
+- The dashboard consumes the validated Order History happy-path fixture through `apps/rapid-prototyping-bo/src/lib/dashboard-data.ts`.
 - The HTTP-like mock endpoint is `GET /api/mock/dashboard`.
+- The default fixture renders read-only order history rows, lightweight order KPIs, and simple status filter options.
 - Keep the first PoC on the default deterministic payload; do not add a runtime scenario switcher yet.
 - `apps/rapid-prototyping-bo/src/lib/mock-preview.ts` owns the preview-mode copy shown in the app.
 

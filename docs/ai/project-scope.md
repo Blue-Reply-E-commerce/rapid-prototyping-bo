@@ -39,6 +39,14 @@ Generated work must extend the real backoffice app. Do not scaffold a separate
 demo application, duplicate the design system locally inside the app, or bypass
 workspace packages with one-off files that cannot become delivery code.
 
+## First BO Surface
+
+The initial Rapid Prototyping BO surface is a mock-only, read-only Order History
+dashboard at `/dashboard`. It shows lightweight order KPIs, simple status/text
+filters, and a list of generic orders with a single monetary total. Customer
+identity, order line items, order detail pages, and order actions are outside
+the first scope.
+
 ## Out of Scope For The PoC
 
 - Backend implementation.

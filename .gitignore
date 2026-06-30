@@ -10,6 +10,9 @@ out/
 dist/
 coverage/
 
+# turbo
+.turbo/
+
 # logs
 *.log
 

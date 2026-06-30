@@ -26,7 +26,7 @@ whenever v0 generates code for this repository.
 - Real frontend app: `apps/rapid-prototyping-bo`.
 - Design-system package: `packages/design-system`.
 - API contract package: `packages/api-client`.
-- First surface: operational backoffice dashboard at `/dashboard`.
+- First surface: read-only Order History dashboard at `/dashboard`.
 
 ## Non-Negotiable Rules
 
@@ -35,6 +35,7 @@ whenever v0 generates code for this repository.
 - Keep Vercel previews mock-only: no production secrets, customer data, VPN requirements, live backend credentials, or live backend dependencies.
 - Use approved design-system exports from `@rapid-prototyping-bo/design-system` whenever a matching primitive exists.
 - Keep generated UI suitable for operational backoffice use: clear hierarchy, compact spacing, restrained styling, predictable navigation, and scan-friendly data.
+- Preserve the first BO scope unless asked otherwise: lightweight order KPIs, simple status/text filters, read-only order list, no customer identity, no line items, no order actions, and no order detail route.
 - Treat UI data needs as API contract questions. Update `packages/api-client` schemas, types, and fixtures when the UI requires new backend fields.
 - Validate mock payloads through Zod parsers before rendering them.
 - Prefer existing packages and patterns before creating new abstractions.
