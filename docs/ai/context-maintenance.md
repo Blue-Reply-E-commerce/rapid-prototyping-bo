@@ -11,6 +11,9 @@ Context files must evolve with the project.
 - `docs/ai/api-client.md`: contract rules and typed payload conventions.
 - `docs/ai/mock-runtime.md`: preview and fixture runtime rules.
 - `docs/ai/jira-handoff.md`: post-approval Jira delivery flow.
+- `docs/agents/issue-tracker.md`: canonical Jira tracker and MCP boundaries.
+- `docs/agents/triage-labels.md`: local and Jira triage vocabulary.
+- `docs/agents/domain.md`: agent documentation layout.
 
 ## Update Rules
 
@@ -20,6 +23,8 @@ Context files must evolve with the project.
 - Update design-system guidance when component APIs, variants, tokens, or usage examples change.
 - Update mock-runtime guidance when preview behavior, fixture strategy, or mock endpoints change.
 - Update Jira handoff guidance when issue shape, required links, or approval rules change.
+- Update agent tracker guidance when the Jira site, project key, board, MCP
+  permissions, or autonomy boundary changes.
 - Add an ADR only for stable architecture decisions that are hard to reverse, surprising without context, and based on a real trade-off.
 - Update the PR description when mock payloads, contract changes, or Jira handoff details change.
 

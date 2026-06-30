@@ -35,3 +35,16 @@ A deterministic sample response used by prototype previews and local development
 ### Jira Delivery Story
 
 The parent Jira issue created after prototype approval. It tracks the approved feature and contains frontend and backend sub-tasks when needed.
+
+### Jira RAP Project
+
+The canonical Jira delivery project for this PoC. It lives at
+`https://bluereplyexp.atlassian.net/jira/software/projects/RAP/boards/2028`,
+uses project key `RAP`, and becomes the delivery source of truth once local
+drafts are published.
+
+### Local Issue Draft
+
+A markdown issue draft stored under `docs/issues/rapid-prototyping-bo/`. Local
+drafts are planning artifacts until published to Jira. After publication, the
+draft should reference the real `RAP-*` key and Jira should own issue status.

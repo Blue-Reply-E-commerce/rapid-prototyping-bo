@@ -44,7 +44,8 @@ v0 will operate on the GitHub repository directly during the PoC. Vercel preview
 - Use deterministic mock payloads that cover happy path, empty state, error state, and large-data cases when relevant.
 - Use v0 as the generation engine and GitHub as the artifact store for the PoC.
 - Treat v0 pull requests as handoff PRs, not automatically mergeable production PRs.
-- Use Jira as the delivery backlog under the `Blue Ecomm - Rapid Prototyping` project/workstream.
+- Use Jira as the delivery backlog under `Blue Ecomm - Rapid Prototyping`,
+  project key `RAP`, board `2028`.
 - Create a parent Jira delivery story and sub-tasks for FE and BE after prototype approval.
 - Create the BE sub-task only when the approved prototype requires an API contract change.
 - Defer branch and commit normalization based on Jira keys to a later phase.

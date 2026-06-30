@@ -2,15 +2,33 @@
 
 Jira tracks approved prototype work after the reviewer accepts a mock-only
 prototype preview. This runbook defines the constrained handoff flow for the
-`Blue Ecomm - Rapid Prototyping` workstream.
+`Blue Ecomm - Rapid Prototyping` workstream in Jira project `RAP`.
 
 ## Target Project
 
 - Jira workstream/project: `Blue Ecomm - Rapid Prototyping`.
+- Jira site: `https://bluereplyexp.atlassian.net`.
+- Jira project key: `RAP`.
+- Jira board ID: `2028`.
+- Jira board URL: `https://bluereplyexp.atlassian.net/jira/software/projects/RAP/boards/2028`.
 - Parent issue type: Story.
 - Child issue type: sub-task.
-- Jira project key, required fields, components, labels, and assignee rules must
-  be confirmed by a human in the real Jira project before the first write.
+- Required fields, components, labels, and assignee rules must be confirmed by a
+  human in the real Jira project before the first write.
+- Local drafts live in `docs/issues/rapid-prototyping-bo/` until published.
+- After publication, Jira is the source of truth for issue status.
+
+## Atlassian MCP Authentication
+
+Jira write access requires an authenticated Atlassian MCP connection in the
+local Codex environment. OAuth tokens, API tokens, cookies, and MCP session
+state must not be committed to the repository.
+
+Before the first Jira write, verify the MCP connection can read project `RAP`,
+board `2028`, available issue types, required fields, workflow statuses, and
+transitions. If the MCP tool is unavailable or unauthenticated, agents may only
+draft Jira issue content in markdown and must ask a human to complete the MCP
+login or connection step.
 
 ## Trigger And Preconditions
 
@@ -23,7 +41,8 @@ Create Jira delivery issues only when all of the following are true:
   required.
 - Mock payloads or fixtures used by the preview are named.
 - Acceptance criteria for the approved prototype are available.
-- Jira writes will be executed through the MCP flow with human approval.
+- Jira writes will be executed through an authenticated MCP flow with human
+  approval.
 
 v0 handoff PRs may prepare Jira draft content, but they must not perform Jira
 write actions automatically.
@@ -64,8 +83,8 @@ record the reviewer decision and the evidence used.
 ## Jira Creation Sequence
 
 1. Prepare one parent delivery Story draft for the approved prototype.
-2. Ask the MCP Jira flow to create the parent Story in
-   `Blue Ecomm - Rapid Prototyping`.
+2. Ask the authenticated MCP Jira flow to create the parent Story in project
+   `RAP`.
 3. Wait for human approval before the parent Story write is performed.
 4. Prepare one FE sub-task draft linked to the parent Story.
 5. Ask the MCP Jira flow to create the FE sub-task.
@@ -136,11 +155,16 @@ may draft issue content, compare it to this runbook, and ask the MCP flow to
 prepare writes, but a human must approve each Jira create or update action before
 it is executed.
 
+Agents may create Jira issues in `RAP` when explicitly asked to decompose
+approved work or publish local drafts. Agents must not move issues to Done,
+change sprint commitments, or assign issues without explicit human instruction.
+
 ## Validation Checklist
 
 Before approving Jira writes, reviewers should confirm:
 
-- The target workstream/project is `Blue Ecomm - Rapid Prototyping`.
+- The target workstream/project is `Blue Ecomm - Rapid Prototyping`, project key
+  `RAP`, board `2028`.
 - The parent issue is a Story for the approved prototype work.
 - Exactly one FE sub-task is linked to the parent Story.
 - A BE sub-task is created only when the decision table requires backend

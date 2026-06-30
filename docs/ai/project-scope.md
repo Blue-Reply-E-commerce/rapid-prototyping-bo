@@ -17,7 +17,8 @@ boundaries.
 - Deterministic mock payloads.
 - Vercel preview builds.
 - v0 handoff PR workflow.
-- Jira parent story plus FE/BE sub-task creation after approval.
+- Jira `RAP` parent story plus FE/BE sub-task creation after approval through an
+  authenticated, human-approved Atlassian MCP flow.
 
 ## Working Paths
 
@@ -27,7 +28,10 @@ boundaries.
 - Shared components: `packages/design-system/src`.
 - API schemas, types, parsers, and fixtures: `packages/api-client/src`.
 - v0 and handoff context: `docs/ai`.
+- Agent tracker context: `docs/agents`.
 - Domain language: `CONTEXT.md`.
+- Local issue drafts before Jira publication:
+  `docs/issues/rapid-prototyping-bo`.
 
 ## Detached App Rule
 
@@ -46,10 +50,13 @@ workspace packages with one-off files that cannot become delivery code.
 - Bitbucket integration.
 - Automatic production merge.
 - Branch/commit normalization based on Jira ticket keys.
+- Committing Jira credentials, OAuth tokens, API tokens, cookies, or MCP session
+  state.
 
 ## Delivery Boundary
 
 v0 output may be used to validate product direction and create reviewable
 handoff PRs. Delivery hardening, real backend integration, production auth, and
-Jira writes remain human-reviewed follow-up work unless a later approved slice
-changes that boundary.
+Jira writes remain human-reviewed follow-up work through the authenticated MCP
+connection unless a later approved slice changes that boundary. Once an issue is
+published to Jira project `RAP`, Jira is the source of truth for status.

@@ -2,9 +2,14 @@
 
 Source PRD: `docs/prd/rapid-prototyping-bo.md`
 
-These are Jira-ready implementation issue drafts for the `Blue Ecomm - Rapid Prototyping` workstream. They are written in dependency order with stable local IDs so blocker references can be replaced with real Jira issue keys after publishing.
+These are Jira-ready implementation issue drafts for the `Blue Ecomm - Rapid Prototyping` workstream in Jira project `RAP`.
+They are written in dependency order with stable local IDs so blocker references can be replaced with real Jira issue keys after publishing.
 
-Jira publication is intentionally deferred for now. The drafts below are the local source of truth until the Atlassian/Jira connection is available.
+Jira publication is pending MCP authentication and real project field validation.
+The drafts below are the local planning source until they are published to Jira.
+After publication, Jira is the source of truth for status.
+
+Target Jira board: `https://bluereplyexp.atlassian.net/jira/software/projects/RAP/boards/2028`
 
 ## Drafts
 
@@ -23,4 +28,5 @@ See `backlog.md` for the consolidated view.
 - Suggested AFK label: `ready-for-agent`
 - Suggested HITL label: `ready-for-human`
 - Replace local blocker references with real Jira issue keys after each issue is created.
-- The Jira delivery handoff slice remains HITL because Jira write actions require manual MCP approval and real project field validation.
+- Jira write actions require authenticated Atlassian MCP access, manual approval,
+  and real project field validation.

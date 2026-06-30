@@ -12,12 +12,17 @@ whenever v0 generates code for this repository.
 4. `docs/ai/api-client.md`
 5. `docs/ai/mock-runtime.md`
 6. `docs/ai/jira-handoff.md`
-7. `docs/ai/context-maintenance.md`
+7. `docs/agents/issue-tracker.md`
+8. `docs/ai/context-maintenance.md`
 
 ## Product Target
 
 - Product name: Rapid Prototyping BO.
 - Jira workstream/project: Blue Ecomm - Rapid Prototyping.
+- Jira site: `https://bluereplyexp.atlassian.net`.
+- Jira project key: `RAP`.
+- Jira board ID: `2028`.
+- Jira board URL: `https://bluereplyexp.atlassian.net/jira/software/projects/RAP/boards/2028`.
 - Real frontend app: `apps/rapid-prototyping-bo`.
 - Design-system package: `packages/design-system`.
 - API contract package: `packages/api-client`.
@@ -34,6 +39,8 @@ whenever v0 generates code for this repository.
 - Validate mock payloads through Zod parsers before rendering them.
 - Prefer existing packages and patterns before creating new abstractions.
 - Treat generated PRs as handoff PRs for review and delivery planning, not automatically mergeable production changes.
+- Do not perform Jira writes from v0. Prepare Jira-ready content only; Codex may
+  publish through authenticated MCP after human approval.
 - Update context docs when project conventions, API contracts, component APIs, or domain language change.
 
 ## Before Opening A Handoff PR

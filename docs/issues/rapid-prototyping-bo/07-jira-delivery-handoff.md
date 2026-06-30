@@ -10,13 +10,13 @@ User stories covered: 8, 10
 
 ## What to build
 
-Define and validate the constrained Jira handoff flow for approved prototype work in the `Blue Ecomm - Rapid Prototyping` workstream. After a prototype preview is approved, the flow should create one parent Jira delivery Story, one FE sub-task, and a BE sub-task only when the approved prototype requires an API contract change.
+Define and validate the constrained Jira handoff flow for approved prototype work in the `Blue Ecomm - Rapid Prototyping` workstream, Jira project key `RAP`, board `2028`. After a prototype preview is approved, the flow should create one parent Jira delivery Story, one FE sub-task, and a BE sub-task only when the approved prototype requires an API contract change.
 
 Jira write actions should remain manual-approval actions through the MCP flow, so this slice requires human validation of the real Jira project, issue types, and required fields.
 
 ## Acceptance criteria
 
-- [x] The handoff flow identifies the target Jira workstream/project as `Blue Ecomm - Rapid Prototyping`.
+- [x] The handoff flow identifies the target Jira workstream/project as `Blue Ecomm - Rapid Prototyping`, project key `RAP`, board `2028`.
 - [x] The flow creates one parent delivery Story for approved prototype work.
 - [x] The flow creates one FE sub-task for frontend delivery work.
 - [x] The flow creates a BE sub-task only when the approved prototype requires an API contract change.

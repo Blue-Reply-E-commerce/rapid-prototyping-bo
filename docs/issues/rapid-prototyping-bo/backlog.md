@@ -2,7 +2,11 @@
 
 Source PRD: `docs/prd/rapid-prototyping-bo.md`
 
-Jira connection is out of scope for now. Use this backlog as the working issue index until the drafts are published.
+Jira project `RAP` is the target delivery tracker. Use this backlog as the local
+planning index until the drafts are published through authenticated Atlassian MCP
+access and mapped to real Jira keys.
+
+Target Jira board: `https://bluereplyexp.atlassian.net/jira/software/projects/RAP/boards/2028`
 
 | Local ID | Title | Type | Suggested label | Blocked by | User stories |
 | --- | --- | --- | --- | --- | --- |
@@ -25,4 +29,7 @@ Jira connection is out of scope for now. Use this backlog as the working issue i
 
 ## Deferred Jira Publication
 
-When Jira access is available, publish in dependency order and replace local IDs in the `Blocked by` sections with real Jira issue keys.
+When authenticated Jira MCP access is available, publish in dependency order and
+replace local IDs in the `Blocked by` sections with real Jira issue keys. After a
+draft is published, read status from Jira instead of maintaining status manually
+in markdown.
