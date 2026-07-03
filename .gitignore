@@ -9,6 +9,7 @@ out/
 # build output
 dist/
 coverage/
+storybook-static/
 
 # turbo
 .turbo/

@@ -1,9 +1,5 @@
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
+  OrderSummaryCard
 } from "@rapid-prototyping-bo/design-system";
 import { getDashboardData } from "@/lib/dashboard-data";
 import { OrderHistoryPanel } from "./order-history-panel";
@@ -71,16 +67,14 @@ export default async function DashboardPage() {
               <h2 className="mt-1 text-2xl font-semibold">Order history</h2>
             </div>
             <div className="flex flex-col gap-3 md:items-end">
-              <Card className="w-full md:w-[420px]">
-                <CardContent className="px-4 py-3">
-                  <p className="text-sm font-semibold text-accent">
-                    {dashboard.preview.label}
-                  </p>
-                  <p className="mt-1 text-sm text-muted">
-                    {dashboard.preview.description}
-                  </p>
-                </CardContent>
-              </Card>
+              <div className="w-full rounded-md border border-line bg-white px-4 py-3 text-ink md:w-[420px]">
+                <p className="text-sm font-semibold text-accent">
+                  {dashboard.preview.label}
+                </p>
+                <p className="mt-1 text-sm text-muted">
+                  {dashboard.preview.description}
+                </p>
+              </div>
               <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
                 Read-only
               </span>
@@ -92,13 +86,12 @@ export default async function DashboardPage() {
             className="mt-6 grid gap-4 sm:grid-cols-3"
           >
             {summaryCards.map((card) => (
-              <Card key={card.id}>
-                <CardContent>
-                  <p className="text-sm font-medium text-muted">{card.label}</p>
-                  <p className="mt-3 text-3xl font-semibold">{card.value}</p>
-                  <p className="mt-2 text-sm text-muted">{card.detail}</p>
-                </CardContent>
-              </Card>
+              <OrderSummaryCard
+                detail={card.detail}
+                key={card.id}
+                label={card.label}
+                value={card.value}
+              />
             ))}
           </section>
 
@@ -108,19 +101,23 @@ export default async function DashboardPage() {
               orders={dashboard.orders}
             />
 
-            <Card as="aside">
-              <CardHeader>
-                <CardTitle>Preview guarantees</CardTitle>
-                <CardDescription>Local preview safety checks</CardDescription>
-              </CardHeader>
-              <CardContent>
+            <aside className="rounded-md border border-line bg-white text-ink">
+              <div className="border-b border-line px-4 py-3">
+                <h3 className="text-base font-semibold leading-6">
+                  Preview guarantees
+                </h3>
+                <p className="mt-1 text-sm text-muted">
+                  Local preview safety checks
+                </p>
+              </div>
+              <div className="p-4">
                 <ul className="space-y-3 text-sm text-muted">
                   {dashboard.previewGuarantees.map((guarantee) => (
                     <li key={guarantee.id}>{guarantee.label}</li>
                   ))}
                 </ul>
-              </CardContent>
-            </Card>
+              </div>
+            </aside>
           </section>
         </section>
       </div>

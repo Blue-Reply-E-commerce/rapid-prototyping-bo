@@ -4,8 +4,10 @@
   "packageManager": "pnpm@11.7.0",
   "scripts": {
     "build": "turbo build",
+    "build-storybook": "turbo build-storybook",
     "dev": "turbo dev",
     "lint": "turbo lint",
+    "storybook": "turbo storybook",
     "test": "turbo test",
     "typecheck": "turbo typecheck"
   },

@@ -2,28 +2,49 @@
   "name": "@rapid-prototyping-bo/design-system",
   "private": true,
   "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
   "exports": {
     ".": "./src/index.ts",
-    "./button": "./src/button.tsx",
-    "./card": "./src/card.tsx"
+    "./button": "./src/atoms/button/index.ts",
+    "./order-summary-card": "./src/molecules/order-summary-card/index.ts",
+    "./order-history-panel": "./src/organisms/order-history-panel/index.ts",
+    "./tokens.css": "./src/tokens/tokens.css"
   },
   "types": "./src/index.ts",
   "scripts": {
     "build": "tsc --noEmit",
+    "build-storybook": "storybook build",
     "lint": "tsc --noEmit",
-    "test": "tsx --test src/__checks__/render.test.tsx",
+    "storybook": "storybook dev -p 6006",
+    "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "react": "19.2.7"
   },
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.3.1"
+  },
   "devDependencies": {
+    "@storybook/addon-docs": "10.4.6",
+    "@storybook/react-vite": "10.4.6",
+    "@tailwindcss/vite": "4.3.1",
+    "@testing-library/jest-dom": "6.9.1",
+    "@testing-library/react": "16.3.2",
     "@types/node": "26.0.1",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
+    "jsdom": "29.1.1",
     "react": "19.2.7",
     "react-dom": "19.2.7",
-    "tsx": "4.22.4",
-    "typescript": "6.0.3"
+    "storybook": "10.4.6",
+    "tailwindcss": "4.3.1",
+    "typescript": "6.0.3",
+    "vitest": "4.1.9"
   }
 }

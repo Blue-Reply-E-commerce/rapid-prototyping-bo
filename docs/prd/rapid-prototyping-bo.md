@@ -8,7 +8,7 @@ The team wants to validate a workflow where v0 can generate UI changes against a
 
 ## Solution
 
-Build a minimal monorepo for `Rapid Prototyping BO` using Turborepo and pnpm. The first application is a small Next.js 16 backoffice with Tailwind CSS, Zustand for client state, and a minimal design system based on shadcn/ui-style primitives.
+Build a minimal monorepo for `Rapid Prototyping BO` using Turborepo and pnpm. The first application is a small Next.js 16 backoffice with Tailwind CSS, Zustand for client state, and a minimal design system based on shadcn/ui-compatible atomic components.
 
 The first product surface is a read-only Order History dashboard with lightweight KPIs, simple status/text filters, and generic order rows. The app should be intentionally small, but structured as if it will grow into a real backoffice: shared packages, design-system primitives, typed API contracts, deterministic mock payloads, and AI context documentation for v0.
 
@@ -19,7 +19,7 @@ v0 will operate on the GitHub repository directly during the PoC. Vercel preview
 1. As a stakeholder, I want to open a Vercel preview of the backoffice, so that I can validate generated UI without needing backend access.
 2. As a product owner, I want v0 to modify the backoffice using project instructions, so that generated changes stay within the intended scope.
 3. As a designer or frontend engineer, I want the app to use a small shared design system, so that future generated screens look coherent.
-4. As a frontend engineer, I want Button and Card primitives available from the design-system package, so that the first dashboard can be assembled from reusable components.
+4. As a frontend engineer, I want a Button atom, OrderSummaryCard molecule, and OrderHistoryPanel organism available from the design-system package, so that the first dashboard can be assembled from reusable presentational components.
 5. As a frontend engineer, I want Tailwind CSS configured consistently across the app and packages, so that styling remains predictable.
 6. As a frontend engineer, I want Zustand available for client state, so that simple UI state can be handled without adding unnecessary infrastructure.
 7. As a frontend engineer, I want typed API contracts in a package, so that UI and mock data changes are explicit.
@@ -37,7 +37,9 @@ v0 will operate on the GitHub repository directly during the PoC. Vercel preview
 - Use Tailwind CSS for styling.
 - Use Zustand for lightweight client-side state management.
 - Use a minimal design-system package with only the initial primitives required for the PoC.
-- Start with shadcn/ui-style Button and Card primitives as the first design-system components.
+- Start with a shadcn/ui-compatible atomic design slice: Button atom, OrderSummaryCard molecule, and OrderHistoryPanel organism.
+- Keep design-system components presentational and controlled through props.
+- Keep design tokens centralized in the design-system package.
 - Create an API client package for TypeScript/Zod-first contracts.
 - Keep OpenAPI/Swagger generation out of scope for the first PoC.
 - Make Vercel previews mock-only.
@@ -55,7 +57,7 @@ v0 will operate on the GitHub repository directly during the PoC. Vercel preview
 
 - Prefer tests at user-visible seams rather than implementation details.
 - Validate that the Order History dashboard renders from deterministic mock data.
-- Validate that Button and Card render consistently through the design-system package.
+- Validate that Button, OrderSummaryCard, and OrderHistoryPanel render consistently through the design-system package.
 - Validate that Zustand state is used only for client UI state, not backend-derived source-of-truth data.
 - Validate that mock payloads conform to typed API contracts.
 - Validate that preview builds do not require live backend access.
@@ -71,7 +73,7 @@ v0 will operate on the GitHub repository directly during the PoC. Vercel preview
 - Support for Bitbucket or other non-GitHub repository providers.
 - Automatic merge to production.
 - Automated branch and commit normalization using Jira ticket keys.
-- Large component library coverage beyond Button and Card.
+- Large component library coverage beyond Button, OrderSummaryCard, and OrderHistoryPanel.
 
 ## Further Notes
 

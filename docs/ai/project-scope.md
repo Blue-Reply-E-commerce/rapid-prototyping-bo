@@ -12,7 +12,9 @@ boundaries.
 - Tailwind CSS styling.
 - Zustand for lightweight client-side UI state.
 - Minimal design-system package in `packages/design-system`.
-- shadcn/ui-style Button and Card primitives.
+- CSS-first design tokens owned by the design-system package.
+- shadcn/ui-compatible atomic design first slice: Button atom,
+  OrderSummaryCard molecule, and OrderHistoryPanel organism.
 - TypeScript/Zod-first API contracts in `packages/api-client`.
 - Deterministic mock payloads.
 - Vercel preview builds.

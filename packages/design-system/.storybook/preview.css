@@ -1,8 +1,6 @@
 @import "tailwindcss";
-@import "@rapid-prototyping-bo/design-system/tokens.css";
-@config "../../tailwind.config.ts";
-@source "../**/*.{ts,tsx}";
-@source "../../../../packages/**/*.{ts,tsx}";
+@import "../src/tokens/tokens.css";
+@source "../src/**/*.{ts,tsx}";
 
 :root {
   color-scheme: light;
@@ -22,9 +20,4 @@ body {
     Arial,
     Helvetica,
     sans-serif;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
 }
