@@ -15,6 +15,12 @@ Context files must evolve with the project.
 - `docs/agents/triage-labels.md`: local and Jira triage vocabulary.
 - `docs/agents/domain.md`: agent documentation layout.
 
+The Rapid Prototyping Portal owns its architecture documentation in the sibling
+repository at
+`../rapid-prototyping-portal/docs/prd/rapid-prototyping-portal-architecture.md`.
+Update that file when portal orchestration, connector, artifact, approval, or
+repository-boundary rules change.
+
 ## Update Rules
 
 - Update `CONTEXT.md` when domain terminology changes.

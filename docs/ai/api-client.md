@@ -27,7 +27,10 @@ The API client package owns frontend-backend contracts for the PoC.
 - The success payload exposes `orderSummary`, `orderFilters`, and `orders`.
 - `orders[]` contains `id`, `title`, `description`, `status`, `totalAmount`, `submittedAt`, and `updatedAt`.
 - `totalAmount` uses `amountMinor` plus a three-letter currency code; do not model money as floating-point `price`.
-- The initial order model does not include customer identity, line items, or operational actions.
+- The initial dashboard row model does not include customer identity, line
+  items, or operational actions. When a requested BO section needs additional
+  view data, add or extend explicit Zod contracts and deterministic fixtures
+  instead of hiding new fields in app-only view models.
 - Simple filtering is limited to order status and text search.
 - Mock fixtures must be parsed with the Zod response schemas before the app renders them.
 - `getDashboardData` in the app should consume validated dashboard payloads, not raw fixture objects.

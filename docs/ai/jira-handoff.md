@@ -30,6 +30,46 @@ transitions. If the MCP tool is unavailable or unauthenticated, agents may only
 draft Jira issue content in markdown and must ask a human to complete the MCP
 login or connection step.
 
+## MCP-Unavailable Draft Mode
+
+Use this mode when the Atlassian/Jira MCP connection is unavailable,
+unauthenticated, blocked by organization policy, or not explicitly approved in
+the current chat.
+
+In this mode, v0 or an agent must not attempt Jira writes. Instead, it should
+produce a Jira Draft Handoff in the handoff PR body or as a local markdown draft
+under `docs/issues/rapid-prototyping-bo/`.
+
+The draft must be precise enough that a human, Codex with authenticated MCP, or
+another Jira-enabled agent can reproduce the intended Jira operations later.
+
+Required Jira Draft Handoff contents:
+
+- Target Jira metadata: site `https://bluereplyexp.atlassian.net`, project key
+  `RAP`, board `2028`, intended parent issue type, and intended child issue
+  type.
+- Source artifacts: approved preview URL if available, handoff PR URL if
+  available, changed workspace paths, affected packages, and context docs
+  touched.
+- API contract impact: contract delta, affected schema/type/parser/fixture
+  paths, or an explicit no-contract-change statement.
+- Mock-runtime impact: deterministic fixture paths and confirmation that the
+  preview requires no backend, VPN, secrets, or production credentials.
+- BE decision result: whether a BE sub-task is required, the evidence for that
+  decision, and any unresolved backend ownership or contract questions.
+- Planned Jira creation sequence: parent Story first, FE sub-task second, and
+  optional BE sub-task third only when required by the BE decision table.
+- Jira preflight checks to run once MCP is available: accessible Atlassian
+  resources/cloud ID, visible `RAP` project, available issue types, create-field
+  metadata for Story and sub-task, required fields, workflow statuses, and
+  transitions.
+- Complete issue drafts for every planned issue using the templates below,
+  including summary, description, acceptance criteria, changed paths, contract
+  impact, fixtures, preview/PR links, labels/components placeholders, and open
+  questions.
+- A clear statement that no Jira writes were performed and that human approval
+  is still required before issue creation.
+
 ## Trigger And Preconditions
 
 Create Jira delivery issues only when all of the following are true:

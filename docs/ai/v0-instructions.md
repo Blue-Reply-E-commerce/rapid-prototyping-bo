@@ -26,7 +26,7 @@ whenever v0 generates code for this repository.
 - Real frontend app: `apps/rapid-prototyping-bo`.
 - Design-system package: `packages/design-system`.
 - API contract package: `packages/api-client`.
-- First surface: read-only Order History dashboard at `/dashboard`.
+- Baseline surface: read-only Order History dashboard at `/dashboard`.
 
 ## Non-Negotiable Rules
 
@@ -35,13 +35,24 @@ whenever v0 generates code for this repository.
 - Keep Vercel previews mock-only: no production secrets, customer data, VPN requirements, live backend credentials, or live backend dependencies.
 - Use approved design-system exports from `@rapid-prototyping-bo/design-system` whenever a matching primitive exists.
 - Keep generated UI suitable for operational backoffice use: clear hierarchy, compact spacing, restrained styling, predictable navigation, and scan-friendly data.
-- Preserve the first BO scope unless asked otherwise: lightweight order KPIs, simple status/text filters, read-only order list, no customer identity, no line items, no order actions, and no order detail route.
+- Treat the existing Order History dashboard as the baseline BO surface, not as
+  a permanent product boundary. New routes, sections, and supporting components
+  are allowed when requested and must follow the same package, design-system,
+  mock-runtime, and API-contract rules.
+- Keep the BO domain generic and privacy-safe. Do not introduce real customer
+  data, production credentials, or operational order mutations unless the
+  requirement explicitly changes that boundary and the context/contracts are
+  updated in the same change.
 - Treat UI data needs as API contract questions. Update `packages/api-client` schemas, types, and fixtures when the UI requires new backend fields.
 - Validate mock payloads through Zod parsers before rendering them.
 - Prefer existing packages and patterns before creating new abstractions.
 - Treat generated PRs as handoff PRs for review and delivery planning, not automatically mergeable production changes.
 - Do not perform Jira writes from v0. Prepare Jira-ready content only; Codex may
   publish through authenticated MCP after human approval.
+- If the Jira/Atlassian MCP is unavailable, blocked, unauthenticated, or not
+  explicitly approved in the current chat, do not skip delivery planning.
+  Produce a Jira Draft Handoff that follows `docs/ai/jira-handoff.md` and can be
+  reviewed, copied, or published later by a human-approved MCP flow.
 - Update context docs when project conventions, API contracts, component APIs, or domain language change.
 
 ## Before Opening A Handoff PR

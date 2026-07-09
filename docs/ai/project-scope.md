@@ -41,13 +41,21 @@ Generated work must extend the real backoffice app. Do not scaffold a separate
 demo application, duplicate the design system locally inside the app, or bypass
 workspace packages with one-off files that cannot become delivery code.
 
-## First BO Surface
+## Baseline BO Surface
 
 The initial Rapid Prototyping BO surface is a mock-only, read-only Order History
 dashboard at `/dashboard`. It shows lightweight order KPIs, simple status/text
-filters, and a list of generic orders with a single monetary total. Customer
-identity, order line items, order detail pages, and order actions are outside
-the first scope.
+filters, and a list of generic orders with a single monetary total.
+
+This initial surface is the current product baseline, not a permanent
+restriction on future sections. New BO pages, detail views, filters, and
+supporting components may be added when requested, provided they remain inside
+the real workspace paths, use deterministic mock data for previews, and make
+any new UI data needs visible through `packages/api-client`.
+
+Keep new slices privacy-safe and operationally restrained by default. Avoid real
+customer data, production credentials, and order mutation workflows unless a
+later approved requirement explicitly changes that boundary.
 
 ## Out of Scope For The PoC
 

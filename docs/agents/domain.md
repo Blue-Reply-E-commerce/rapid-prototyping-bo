@@ -15,6 +15,10 @@ work that touches product behavior, delivery flow, or architecture:
 - `docs/agents/issue-tracker.md`: canonical tracker and MCP boundaries.
 - `docs/agents/triage-labels.md`: triage vocabulary.
 
+For work that touches the future portal or the BO-to-portal integration, also
+read the portal-owned architecture PRD in the sibling repository:
+`../rapid-prototyping-portal/docs/prd/rapid-prototyping-portal-architecture.md`.
+
 ## ADRs
 
 There is no `docs/adr/` directory yet. Add ADRs only for durable architecture
