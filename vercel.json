@@ -1,7 +1,6 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "framework": "nextjs",
-  "installCommand": "pnpm install --frozen-lockfile",
-  "buildCommand": "pnpm --filter @rapid-prototyping-bo/rapid-prototyping-bo build",
-  "outputDirectory": "apps/rapid-prototyping-bo/.next"
+    "$schema": "https://openapi.vercel.sh/vercel.json",
+    "framework": "nextjs",
+    "installCommand": "pnpm install --frozen-lockfile",
+    "buildCommand": "pnpm --filter @rapid-prototyping-bo/web build"
 }
