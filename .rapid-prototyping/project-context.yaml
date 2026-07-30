@@ -1,0 +1,177 @@
+schemaVersion: "1"
+kind: ProjectContextManifest
+
+contextSources:
+  - id: agent-instructions
+    path: AGENTS.md
+    purpose: agent-instructions
+    description: Repository-wide instructions and links to tracker and domain guidance.
+  - id: domain-language
+    path: CONTEXT.md
+    purpose: domain-language
+    description: Canonical Rapid Prototyping BO terminology.
+  - id: product-requirements
+    path: docs/prd/rapid-prototyping-bo.md
+    purpose: product-requirements
+    description: Product goals, scope, user stories, and delivery decisions.
+  - id: v0-entrypoint
+    path: docs/ai/v0-instructions.md
+    purpose: agent-instructions
+    description: Primary generated-work instructions and required context read order.
+  - id: project-scope
+    path: docs/ai/project-scope.md
+    purpose: project-scope
+    description: Workspace, application, package, preview, and delivery boundaries.
+  - id: design-system
+    path: docs/ai/design-system.md
+    purpose: design-system
+    description: Approved components, tokens, composition rules, stories, and tests.
+  - id: api-contract
+    path: docs/ai/api-client.md
+    purpose: api-contract
+    description: Typed API contract, parser, fixture, and contract-change rules.
+  - id: mock-runtime
+    path: docs/ai/mock-runtime.md
+    purpose: mock-runtime
+    description: Deterministic mock-only preview runtime requirements.
+  - id: delivery-rules
+    path: docs/ai/jira-handoff.md
+    purpose: delivery-rules
+    description: Approved-prototype Jira drafting and handoff boundaries.
+  - id: context-maintenance
+    path: docs/ai/context-maintenance.md
+    purpose: context-maintenance
+    description: Rules for keeping repository-owned project context current.
+
+targets:
+  - id: rapid-prototyping-bo-web
+    path: apps/rapid-prototyping-bo
+    kind: application
+    primary: true
+    description: Next.js backoffice application and primary prototype target.
+  - id: design-system-package
+    path: packages/design-system
+    kind: package
+    primary: false
+    description: Shared presentational components, tokens, stories, and component tests.
+  - id: api-client-package
+    path: packages/api-client
+    kind: package
+    primary: false
+    description: TypeScript and Zod contracts, parsers, and deterministic fixtures.
+
+specialistProfiles:
+  - role: frontend
+    contextSourceIds:
+      - agent-instructions
+      - domain-language
+      - product-requirements
+      - v0-entrypoint
+      - project-scope
+      - design-system
+      - api-contract
+      - mock-runtime
+    targetIds:
+      - rapid-prototyping-bo-web
+      - design-system-package
+      - api-client-package
+  - role: design-system
+    contextSourceIds:
+      - agent-instructions
+      - domain-language
+      - v0-entrypoint
+      - project-scope
+      - design-system
+      - context-maintenance
+    targetIds:
+      - design-system-package
+      - rapid-prototyping-bo-web
+  - role: backend-contract
+    contextSourceIds:
+      - agent-instructions
+      - domain-language
+      - product-requirements
+      - project-scope
+      - api-contract
+      - mock-runtime
+      - delivery-rules
+    targetIds:
+      - api-client-package
+      - rapid-prototyping-bo-web
+
+mutationBoundary:
+  allowedPaths:
+    - apps/rapid-prototyping-bo
+    - packages/design-system
+    - packages/api-client
+    - docs/ai
+    - CONTEXT.md
+    - package.json
+    - pnpm-lock.yaml
+    - pnpm-workspace.yaml
+    - turbo.json
+  deniedPaths:
+    - "**/.env"
+    - "**/.env.*"
+    - "**/*.key"
+    - "**/*.pem"
+    - "**/node_modules/**"
+    - "**/.next/**"
+    - "**/dist/**"
+    - "**/coverage/**"
+    - "**/storybook-static/**"
+
+validation:
+  targeted:
+    - id: web-typecheck
+      run: pnpm --filter=@rapid-prototyping-bo/web typecheck
+      targetIds:
+        - rapid-prototyping-bo-web
+      description: Type-check the primary Next.js application.
+    - id: web-lint
+      run: pnpm --filter=@rapid-prototyping-bo/web lint
+      targetIds:
+        - rapid-prototyping-bo-web
+      description: Lint the primary Next.js application.
+    - id: design-system-test
+      run: pnpm --filter=@rapid-prototyping-bo/design-system test
+      targetIds:
+        - design-system-package
+      description: Run public-behavior component tests for changed design-system work.
+    - id: design-system-storybook
+      run: pnpm --filter=@rapid-prototyping-bo/design-system build-storybook
+      targetIds:
+        - design-system-package
+      description: Compile Storybook when reusable component behavior or stories change.
+    - id: api-client-typecheck
+      run: pnpm --filter=@rapid-prototyping-bo/api-client typecheck
+      targetIds:
+        - api-client-package
+      description: Type-check contracts, parsers, and deterministic fixtures.
+  final:
+    - id: workspace-typecheck
+      run: pnpm typecheck
+      description: Type-check all workspace targets before Delivery Candidate creation.
+    - id: workspace-lint
+      run: pnpm lint
+      description: Run the workspace lint boundary before Delivery Candidate creation.
+    - id: design-system-tests
+      run: pnpm --filter=@rapid-prototyping-bo/design-system test
+      description: Run the repository's behavior-focused component tests.
+    - id: workspace-build
+      run: pnpm build
+      description: Build the complete workspace, including the primary Next.js application.
+
+discoveryExclusions:
+  - .git/**
+  - .agents/**
+  - "**/.env"
+  - "**/.env.*"
+  - "**/*.key"
+  - "**/*.pem"
+  - "**/node_modules/**"
+  - "**/.next/**"
+  - "**/dist/**"
+  - "**/coverage/**"
+  - "**/storybook-static/**"
+  - docs/issues/**

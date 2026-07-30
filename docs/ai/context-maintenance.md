@@ -4,6 +4,9 @@ Context files must evolve with the project.
 
 ## Context Map
 
+- `.rapid-prototyping/project-context.yaml`: versioned Portal index of
+  authoritative context sources, repository targets, specialist profiles,
+  mutation boundaries, validation commands, and discovery exclusions.
 - `CONTEXT.md`: domain language and shared glossary.
 - `docs/ai/v0-instructions.md`: entrypoint and non-negotiable v0 rules.
 - `docs/ai/project-scope.md`: workspace boundaries and in/out of scope.
@@ -24,6 +27,9 @@ repository-boundary rules change.
 ## Update Rules
 
 - Update `CONTEXT.md` when domain terminology changes.
+- Update `.rapid-prototyping/project-context.yaml` when authoritative context
+  sources, repository targets, mutation boundaries, specialist applicability,
+  validation commands, or discovery exclusions change.
 - Update `docs/ai/*` when v0 operating rules change.
 - Update API guidance when contract conventions change.
 - Update design-system guidance when component APIs, variants, tokens, or usage examples change.
