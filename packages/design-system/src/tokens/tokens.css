@@ -1,9 +1,9 @@
 @theme {
-  --color-canvas: #f6f7f9;
-  --color-ink: #202329;
-  --color-muted: #667085;
-  --color-line: #d9dee7;
-  --color-accent: #0f766e;
-  --color-warning: #b45309;
-  --color-danger: #be123c;
+  --color-canvas: #fbf7f2;
+  --color-ink: #2d2723;
+  --color-muted: #7a6b61;
+  --color-line: #e7ddd3;
+  --color-accent: #b86643;
+  --color-warning: #b86643;
+  --color-danger: #2d2723;
 }
