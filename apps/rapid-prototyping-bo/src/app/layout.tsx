@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Rapid Prototyping BO",
+  title: "RP back office",
   description: "Mock-only backoffice order history dashboard."
 };
 
