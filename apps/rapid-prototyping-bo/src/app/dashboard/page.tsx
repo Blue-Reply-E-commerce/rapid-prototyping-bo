@@ -46,16 +46,28 @@ export default async function DashboardPage() {
           <nav aria-label="Primary" className="mt-6 flex gap-2 lg:flex-col">
             <a
               aria-current="page"
-              className="rounded-md bg-ink px-3 py-2 text-sm font-medium text-white"
+              className="rounded-md bg-ink px-3 py-2.5 text-contrast"
               href="/dashboard"
             >
-              Dashboard
+              <span className="block text-sm font-semibold !text-contrast">Dashboard</span>
+              <span className="mt-0.5 block text-xs leading-5 text-contrast/75">
+                Overview and order health
+              </span>
             </a>
-            <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
-              Orders
-            </span>
-            <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
-              Settings
+            <a
+              className="rounded-md px-3 py-2.5 text-ink transition-colors hover:bg-canvas"
+              href="#order-history"
+            >
+              <span className="block text-sm font-semibold">Orders</span>
+              <span className="mt-0.5 block text-xs leading-5 text-muted">
+                Review recent activity
+              </span>
+            </a>
+            <span className="rounded-md px-3 py-2.5 text-muted">
+              <span className="block text-sm font-semibold text-ink">Settings</span>
+              <span className="mt-0.5 block text-xs leading-5">
+                Workspace preferences
+              </span>
             </span>
           </nav>
         </aside>
