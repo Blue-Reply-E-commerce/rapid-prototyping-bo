@@ -186,7 +186,12 @@ export function OrderHistoryPanel({
               rows.map((row) => (
                 <tr className="border-t border-line" data-slot="order-history-panel-row" key={row.id}>
                   <td className={cn(presentation.bodyCellClassName, "font-medium")}>
-                    <div>{row.orderTitle}</div>
+                    <a
+                      className="underline decoration-accent underline-offset-4 hover:text-accent"
+                      href={`/dashboard/orders/${encodeURIComponent(row.id)}`}
+                    >
+                      {row.orderTitle}
+                    </a>
                     {row.orderDescription ? (
                       <div className="mt-1 text-xs font-normal text-muted">
                         {row.orderDescription}
