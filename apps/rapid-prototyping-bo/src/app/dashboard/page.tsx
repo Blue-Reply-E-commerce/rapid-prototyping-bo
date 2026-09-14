@@ -36,7 +36,7 @@ export default async function DashboardPage() {
               <p className="text-xs font-semibold uppercase tracking-wide text-accent">
                 Backoffice
               </p>
-              <h1 className="mt-1 text-xl font-semibold">Rapid Prototyping BO</h1>
+              <h1 className="mt-1 text-xl font-semibold">Rapid Prototyping BO Title</h1>
             </div>
             <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
               PoC
