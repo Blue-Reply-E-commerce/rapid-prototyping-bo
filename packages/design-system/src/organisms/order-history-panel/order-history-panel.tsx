@@ -23,6 +23,7 @@ export type OrderHistoryPanelFilterOption = {
 
 export type OrderHistoryPanelRow = {
   id: string;
+  href?: string;
   orderDescription?: React.ReactNode;
   orderTitle: React.ReactNode;
   statusLabel: React.ReactNode;
@@ -186,7 +187,15 @@ export function OrderHistoryPanel({
               rows.map((row) => (
                 <tr className="border-t border-line" data-slot="order-history-panel-row" key={row.id}>
                   <td className={cn(presentation.bodyCellClassName, "font-medium")}>
-                    <div>{row.orderTitle}</div>
+                    <div>
+                      {row.href ? (
+                        <a className="text-accent underline-offset-4 hover:underline" href={row.href}>
+                          {row.orderTitle}
+                        </a>
+                      ) : (
+                        row.orderTitle
+                      )}
+                    </div>
                     {row.orderDescription ? (
                       <div className="mt-1 text-xs font-normal text-muted">
                         {row.orderDescription}
