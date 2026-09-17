@@ -87,6 +87,7 @@ export function OrderHistoryPanel({ orderFilters, orders }: OrderHistoryPanelPro
   });
   const rows: OrderHistoryPanelRow[] = filteredOrders.map((order) => ({
     id: order.id,
+    href: `/dashboard/orders/${order.id}`,
     orderDescription: `${order.id} - ${order.description}`,
     orderTitle: order.title,
     statusLabel: statusLabels[order.status],
