@@ -11,3 +11,7 @@ export async function getDashboardData(): Promise<DashboardSuccessResponse> {
 export function getMockDashboardResponse(): DashboardSuccessResponse {
   return parseDashboardSuccessResponse(dashboardHappyPathFixture);
 }
+
+export function getOrderById(orderId: string) {
+  return dashboardHappyPathFixture.orders.find((order) => order.id === orderId);
+}
