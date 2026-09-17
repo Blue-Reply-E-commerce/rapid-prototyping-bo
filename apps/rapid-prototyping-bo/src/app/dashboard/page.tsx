@@ -82,6 +82,45 @@ export default async function DashboardPage() {
           </header>
 
           <section
+            aria-labelledby="editorial-heading"
+            className="mt-6 overflow-hidden rounded-md border border-line bg-[var(--editorial-surface)]"
+          >
+            <div className="grid gap-0 lg:grid-cols-[1.15fr_0.85fr]">
+              <div className="flex flex-col justify-between gap-8 border-b border-[var(--editorial-rule)] p-6 sm:p-8 lg:border-b-0 lg:border-r">
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                    The operations desk
+                  </p>
+                  <h3
+                    id="editorial-heading"
+                    className="mt-4 max-w-xl font-[var(--editorial-display)] text-4xl leading-[0.98] tracking-[-0.04em] text-ink sm:text-5xl"
+                  >
+                    Make every order feel considered.
+                  </h3>
+                  <p className="mt-5 max-w-lg text-sm leading-6 text-muted">
+                    A closer look at the small decisions behind a calmer, more intentional order experience.
+                  </p>
+                </div>
+                <a className="w-fit border-b border-ink pb-1 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent" href="#order-history">
+                  Explore the latest notes
+                </a>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-1">
+                <article className="border-b border-[var(--editorial-rule)] p-6 sm:border-b-0 sm:border-r lg:border-b lg:border-r-0">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">01 / Dispatch</p>
+                  <h4 className="mt-3 font-[var(--editorial-display)] text-2xl leading-tight text-ink">The quiet logic of a good handoff</h4>
+                  <p className="mt-3 text-sm leading-6 text-muted">Why the final mile starts long before a parcel leaves the warehouse.</p>
+                </article>
+                <article className="p-6">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">02 / Signals</p>
+                  <h4 className="mt-3 font-[var(--editorial-display)] text-2xl leading-tight text-ink">Read the pattern, not the noise</h4>
+                  <p className="mt-3 text-sm leading-6 text-muted">A field guide to spotting friction in your daily order rhythm.</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section
             aria-label="Summary"
             className="mt-6 grid gap-4 sm:grid-cols-3"
           >
@@ -95,7 +134,7 @@ export default async function DashboardPage() {
             ))}
           </section>
 
-          <section className="mt-6 grid gap-6 xl:grid-cols-[1fr_320px]">
+          <section id="order-history" className="mt-6 grid gap-6 xl:grid-cols-[1fr_320px]">
             <OrderHistoryPanel
               orderFilters={dashboard.orderFilters}
               orders={dashboard.orders}

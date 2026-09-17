@@ -7,6 +7,10 @@
 :root {
   color-scheme: light;
   background: var(--color-canvas);
+  --editorial-surface: #e8eef7;
+  --editorial-surface-strong: #dbe7f5;
+  --editorial-rule: #c4d2e3;
+  --editorial-display: Georgia, "Times New Roman", serif;
 }
 
 * {
