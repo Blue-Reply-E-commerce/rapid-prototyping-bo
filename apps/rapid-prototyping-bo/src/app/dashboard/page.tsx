@@ -54,9 +54,12 @@ export default async function DashboardPage() {
             <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
               Orders
             </span>
-            <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
+            <a
+              className="rounded-md px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-canvas hover:text-ink"
+              href="/settings"
+            >
               Settings
-            </span>
+            </a>
           </nav>
         </aside>
 

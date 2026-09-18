@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Rapid Prototyping BO",
-  description: "Mock-only backoffice order history dashboard."
+  description: "Backoffice workspace for order history and operational settings."
 };
 
 export default function RootLayout({
