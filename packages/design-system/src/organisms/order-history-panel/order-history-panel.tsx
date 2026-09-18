@@ -93,7 +93,7 @@ export function OrderHistoryPanel({
   selectedStatusFilter,
   statusFilterLabel = "Order status filter",
   statusFilterOptions,
-  title = "Order history",
+  title = "Test RB",
   ...props
 }: OrderHistoryPanelProps) {
   const presentation = densityPresentation[selectedDensity];
