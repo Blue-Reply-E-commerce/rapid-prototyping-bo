@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import type {
   DashboardSuccessResponse,
   OrderStatus
@@ -63,6 +64,13 @@ function formatDate(value: string) {
 }
 
 export function OrderHistoryPanel({ orderFilters, orders }: OrderHistoryPanelProps) {
+  const [currency, setCurrency] = useState("EUR");
+  useEffect(() => {
+    const readCurrency = () => setCurrency(document.cookie.match(/(?:^|; )dashboard_currency=([^;]+)/)?.[1] ?? "EUR");
+    readCurrency();
+    window.addEventListener("dashboard-currency-change", readCurrency);
+    return () => window.removeEventListener("dashboard-currency-change", readCurrency);
+  }, []);
   const displayDensity = useDashboardUiStore((state) => state.displayDensity);
   const searchQuery = useDashboardUiStore((state) => state.searchQuery);
   const statusFilter = useDashboardUiStore((state) => state.statusFilter);
@@ -96,7 +104,7 @@ export function OrderHistoryPanel({ orderFilters, orders }: OrderHistoryPanelPro
     statusLabel: statusLabels[order.status],
     statusTone: statusTones[order.status],
     submittedAt: formatDate(order.submittedAt),
-    total: formatCurrency(order.totalAmount.amountMinor, order.totalAmount.currency),
+    total: formatCurrency(order.totalAmount.amountMinor, currency),
     updatedAt: formatDate(order.updatedAt)
   }));
 

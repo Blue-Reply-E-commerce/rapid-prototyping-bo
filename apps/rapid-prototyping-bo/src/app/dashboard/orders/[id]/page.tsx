@@ -1,3 +1,4 @@
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { getDashboardData } from "@/lib/dashboard-data";
 
@@ -8,6 +9,7 @@ function currency(amountMinor: number, currencyCode: string) {
 export default async function OrderDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const dashboard = await getDashboardData();
+  const selectedCurrency = (await cookies()).get("dashboard_currency")?.value ?? "EUR";
   const order = dashboard.orders.find((candidate) => candidate.id === id);
   if (!order) notFound();
 
@@ -26,10 +28,10 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
           <div className="overflow-hidden rounded-md border border-line bg-white">
             <div className="border-b border-line px-5 py-4"><h2 className="font-semibold">Order items</h2><p className="mt-1 text-sm text-muted">Items associated with this order</p></div>
             <div className="divide-y divide-line">
-              {items.map((item) => <div className="flex items-center justify-between gap-4 px-5 py-4" key={item.id}><div><p className="font-medium">{item.name}</p><p className="mt-1 text-sm text-muted">Quantity {item.quantity}</p></div><p className="font-medium">{currency(item.unitAmount.amountMinor * item.quantity, item.unitAmount.currency)}</p></div>)}
+              {items.map((item) => <div className="flex items-center justify-between gap-4 px-5 py-4" key={item.id}><div><p className="font-medium">{item.name}</p><p className="mt-1 text-sm text-muted">Quantity {item.quantity}</p></div><p className="font-medium">{currency(item.unitAmount.amountMinor * item.quantity, selectedCurrency)}</p></div>)}
             </div>
           </div>
-          <aside className="rounded-md border border-line bg-white p-5"><h2 className="font-semibold">Order summary</h2><dl className="mt-5 space-y-4 text-sm"><div className="flex justify-between gap-4"><dt className="text-muted">Submitted</dt><dd>{new Date(order.submittedAt).toLocaleDateString("en-GB")}</dd></div><div className="flex justify-between gap-4"><dt className="text-muted">Last updated</dt><dd>{new Date(order.updatedAt).toLocaleDateString("en-GB")}</dd></div><div className="flex justify-between gap-4 border-t border-line pt-4 text-base font-semibold"><dt>Total</dt><dd>{currency(order.totalAmount.amountMinor, order.totalAmount.currency)}</dd></div></dl></aside>
+          <aside className="rounded-md border border-line bg-white p-5"><h2 className="font-semibold">Order summary</h2><dl className="mt-5 space-y-4 text-sm"><div className="flex justify-between gap-4"><dt className="text-muted">Submitted</dt><dd>{new Date(order.submittedAt).toLocaleDateString("en-GB")}</dd></div><div className="flex justify-between gap-4"><dt className="text-muted">Last updated</dt><dd>{new Date(order.updatedAt).toLocaleDateString("en-GB")}</dd></div><div className="flex justify-between gap-4 border-t border-line pt-4 text-base font-semibold"><dt>Total</dt><dd>{currency(order.totalAmount.amountMinor, selectedCurrency)}</dd></div></dl></aside>
         </section>
       </div>
     </main>
