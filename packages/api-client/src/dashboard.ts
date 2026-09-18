@@ -19,11 +19,21 @@ export const OrderTotalSchema = z
   })
   .strict();
 
+export const DashboardOrderItemSchema = z
+  .object({
+    id: NonEmptyStringSchema,
+    name: NonEmptyStringSchema,
+    quantity: z.number().int().positive(),
+    unitAmount: OrderTotalSchema
+  })
+  .strict();
+
 export const DashboardOrderSchema = z
   .object({
     id: NonEmptyStringSchema,
     title: NonEmptyStringSchema,
     description: NonEmptyStringSchema,
+    items: z.array(DashboardOrderItemSchema).optional(),
     status: OrderStatusSchema,
     totalAmount: OrderTotalSchema,
     submittedAt: z.string().datetime(),
@@ -110,6 +120,7 @@ export const DashboardResponseSchema = z.discriminatedUnion("kind", [
 export type OrderStatus = z.infer<typeof OrderStatusSchema>;
 export type CurrencyCode = z.infer<typeof CurrencyCodeSchema>;
 export type OrderTotal = z.infer<typeof OrderTotalSchema>;
+export type DashboardOrderItem = z.infer<typeof DashboardOrderItemSchema>;
 export type DashboardOrder = z.infer<typeof DashboardOrderSchema>;
 export type DashboardOrderSummary = z.infer<typeof DashboardOrderSummarySchema>;
 export type DashboardOrderFilters = z.infer<typeof DashboardOrderFiltersSchema>;

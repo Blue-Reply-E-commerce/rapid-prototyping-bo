@@ -88,7 +88,11 @@ export function OrderHistoryPanel({ orderFilters, orders }: OrderHistoryPanelPro
   const rows: OrderHistoryPanelRow[] = filteredOrders.map((order) => ({
     id: order.id,
     orderDescription: `${order.id} - ${order.description}`,
-    orderTitle: order.title,
+    orderTitle: (
+      <a className="text-accent hover:underline" href={`/dashboard/orders/${order.id}`}>
+        {order.title}
+      </a>
+    ),
     statusLabel: statusLabels[order.status],
     statusTone: statusTones[order.status],
     submittedAt: formatDate(order.submittedAt),

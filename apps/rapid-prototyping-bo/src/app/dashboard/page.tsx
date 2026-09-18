@@ -51,12 +51,12 @@ export default async function DashboardPage() {
             >
               Dashboard
             </a>
-            <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
+            <a className="rounded-md px-3 py-2 text-sm font-medium text-muted hover:bg-canvas" href="/dashboard">
               Orders
-            </span>
-            <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
+            </a>
+            <a className="rounded-md px-3 py-2 text-sm font-medium text-muted hover:bg-canvas" href="/settings">
               Settings
-            </span>
+            </a>
           </nav>
         </aside>
 
