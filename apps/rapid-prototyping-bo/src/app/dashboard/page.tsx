@@ -46,7 +46,7 @@ export default async function DashboardPage() {
           <nav aria-label="Primary" className="mt-6 flex gap-2 lg:flex-col">
             <a
               aria-current="page"
-              className="rounded-md bg-ink px-3 py-2 text-sm font-medium text-white"
+              className="rounded-md bg-ink px-3 py-2 text-sm font-medium !text-white hover:!text-white"
               href="/dashboard"
             >
               Dashboard
@@ -54,9 +54,12 @@ export default async function DashboardPage() {
             <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
               Orders
             </span>
-            <span className="rounded-md px-3 py-2 text-sm font-medium text-muted">
+            <a
+              className="rounded-md px-3 py-2 text-sm font-medium text-muted transition-colors hover:bg-canvas hover:text-ink"
+              href="/settings"
+            >
               Settings
-            </span>
+            </a>
           </nav>
         </aside>
 
