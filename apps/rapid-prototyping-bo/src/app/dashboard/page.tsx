@@ -66,19 +66,9 @@ export default async function DashboardPage() {
               <p className="text-sm font-medium text-muted">Dashboard</p>
               <h2 className="mt-1 text-2xl font-semibold">Order history</h2>
             </div>
-            <div className="flex flex-col gap-3 md:items-end">
-              <div className="w-full rounded-md border border-line bg-white px-4 py-3 text-ink md:w-[420px]">
-                <p className="text-sm font-semibold text-accent">
-                  {dashboard.preview.label}
-                </p>
-                <p className="mt-1 text-sm text-muted">
-                  {dashboard.preview.description}
-                </p>
-              </div>
-              <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
-                Read-only
-              </span>
-            </div>
+            <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
+              Read-only
+            </span>
           </header>
 
           <section
