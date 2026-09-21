@@ -9,7 +9,7 @@ describe("OrderHistoryPanel", () => {
       <OrderHistoryPanel {...orderHistoryPanelExamples.default} />
     );
 
-    expect(screen.getByRole("heading", { name: "Order history" })).toHaveAttribute(
+    expect(screen.getByRole("heading", { name: "Order history test" })).toHaveAttribute(
       "data-slot",
       "order-history-panel-title"
     );
