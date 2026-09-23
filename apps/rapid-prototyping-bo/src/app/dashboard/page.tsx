@@ -46,7 +46,7 @@ export default async function DashboardPage() {
           <nav aria-label="Primary" className="mt-6 flex gap-2 lg:flex-col">
             <a
               aria-current="page"
-              className="rounded-md bg-ink px-3 py-2 text-sm font-medium text-white"
+              className="rounded-md bg-ink px-3 py-2 text-sm font-medium !text-white"
               href="/dashboard"
             >
               Dashboard
