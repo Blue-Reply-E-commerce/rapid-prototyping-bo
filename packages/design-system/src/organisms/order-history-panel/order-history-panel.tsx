@@ -71,7 +71,7 @@ const densityPresentation: Record<
 const statusToneClassNames: Record<OrderHistoryPanelStatusTone, string> = {
   danger: "border-danger/40 bg-danger/10 text-danger",
   muted: "border-line bg-canvas text-muted",
-  neutral: "border-line bg-white text-ink",
+  neutral: "border-line bg-surface text-ink",
   success: "border-accent/40 bg-accent/10 text-accent",
   warning: "border-warning/40 bg-warning/10 text-warning"
 };
@@ -100,7 +100,7 @@ export function OrderHistoryPanel({
 
   return (
     <section
-      className={cn("overflow-hidden rounded-md border border-line bg-white text-ink", className)}
+      className={cn("overflow-hidden rounded-md border border-line bg-surface text-ink", className)}
       data-slot="order-history-panel"
       {...props}
     >
@@ -111,7 +111,7 @@ export function OrderHistoryPanel({
           </h3>
           <div
             aria-label={densityLabel}
-            className="inline-flex w-fit rounded-md border border-line bg-white p-1"
+            className="inline-flex w-fit rounded-md border border-line bg-surface p-1"
             data-slot="order-history-panel-density"
           >
             {densityOptions.map((density) => (
@@ -133,7 +133,7 @@ export function OrderHistoryPanel({
             {searchLabel}
           </label>
           <input
-            className="h-9 w-full rounded-md border border-line bg-white px-3 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-accent lg:max-w-xs"
+            className="h-9 w-full rounded-md border border-line bg-surface px-3 text-sm text-ink outline-none transition-colors placeholder:text-muted focus:border-accent lg:max-w-xs"
             data-slot="order-history-panel-search"
             id={searchInputId}
             onChange={(event) => onSearchQueryChange(event.target.value)}

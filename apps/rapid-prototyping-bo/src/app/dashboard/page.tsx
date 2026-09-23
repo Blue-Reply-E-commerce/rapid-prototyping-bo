@@ -30,7 +30,7 @@ export default async function DashboardPage() {
   return (
     <main className="min-h-screen bg-canvas text-ink">
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[240px_1fr]">
-        <aside className="border-b border-line bg-white px-5 py-4 lg:border-b-0 lg:border-r">
+        <aside className="border-b border-line bg-surface px-5 py-4 lg:border-b-0 lg:border-r">
           <div className="flex items-center justify-between gap-4 lg:block">
             <div>
               <p className="text-xs font-semibold uppercase tracking-wide text-accent">
@@ -91,7 +91,7 @@ export default async function DashboardPage() {
               orders={dashboard.orders}
             />
 
-            <aside className="rounded-md border border-line bg-white text-ink">
+            <aside className="rounded-md border border-line bg-surface text-ink">
               <div className="border-b border-line px-4 py-3">
                 <h3 className="text-base font-semibold leading-6">
                   Preview guarantees

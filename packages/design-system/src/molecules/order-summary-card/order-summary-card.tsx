@@ -19,7 +19,7 @@ export function OrderSummaryCard({
 }: OrderSummaryCardProps) {
   return (
     <article
-      className={cn("rounded-md border border-line bg-white p-4 text-ink", className)}
+      className={cn("rounded-md border border-line bg-surface p-4 text-ink", className)}
       data-slot="order-summary-card"
       {...props}
     >
