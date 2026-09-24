@@ -33,7 +33,7 @@ export default async function DashboardPage() {
         <aside className="border-b border-line bg-white px-5 py-4 lg:border-b-0 lg:border-r">
           <div className="flex items-center justify-between gap-4 lg:block">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-accent">
+              <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">
                 Backoffice
               </p>
               <h1 className="mt-1 text-xl font-semibold">Rapid Prototyping BO</h1>
