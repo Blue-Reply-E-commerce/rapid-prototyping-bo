@@ -31,16 +31,11 @@ export default async function DashboardPage() {
     <main className="min-h-screen bg-canvas text-ink">
       <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[240px_1fr]">
         <aside className="border-b border-line bg-white px-5 py-4 lg:border-b-0 lg:border-r">
-          <div className="flex items-center justify-between gap-4 lg:block">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">
-                Backoffice
-              </p>
-              <h1 className="mt-1 text-xl font-semibold">Rapid Prototyping BO</h1>
-            </div>
-            <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
-              PoC
-            </span>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">
+              Backoffice
+            </p>
+            <h1 className="mt-1 text-xl font-semibold">Rapid Prototyping BO</h1>
           </div>
 
           <nav aria-label="Primary" className="mt-6 flex gap-2 lg:flex-col">
