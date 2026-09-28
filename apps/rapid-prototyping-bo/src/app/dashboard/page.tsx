@@ -62,7 +62,7 @@ export default async function DashboardPage() {
               <h2 className="mt-1 text-2xl font-semibold">Order history</h2>
             </div>
             <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
-              Read-only
+              Read-only test
             </span>
           </header>
 
