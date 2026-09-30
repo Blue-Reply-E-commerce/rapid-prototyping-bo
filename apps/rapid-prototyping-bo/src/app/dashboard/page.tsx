@@ -59,7 +59,7 @@ export default async function DashboardPage() {
           <header className="flex flex-col gap-4 border-b border-line pb-5 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm font-medium text-muted">Dashboard</p>
-              <h2 className="mt-1 text-2xl font-semibold">Order history</h2>
+              <h2 className="mt-1 text-2xl font-semibold">Order history Test</h2>
             </div>
             <span className="rounded-full border border-line px-3 py-1 text-xs font-medium text-muted">
               Read-only
