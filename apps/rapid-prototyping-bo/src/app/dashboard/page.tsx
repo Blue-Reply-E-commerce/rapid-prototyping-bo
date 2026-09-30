@@ -35,7 +35,7 @@ export default async function DashboardPage() {
             <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">
               Backoffice
             </p>
-            <h1 className="mt-1 text-xl font-semibold">Rapid Prototyping BO</h1>
+            <h1 className="mt-1 text-xl font-semibold">Rapid Protoyping Test</h1>
           </div>
 
           <nav aria-label="Primary" className="mt-6 flex gap-2 lg:flex-col">
