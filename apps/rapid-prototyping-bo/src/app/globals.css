@@ -7,6 +7,9 @@
 :root {
   color-scheme: light;
   background: var(--color-canvas);
+  --surface-raised: #ffffff;
+  --surface-soft: #eef5f3;
+  --focus-ring: #0f766e;
 }
 
 * {

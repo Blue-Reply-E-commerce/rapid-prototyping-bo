@@ -80,6 +80,63 @@ export default async function DashboardPage() {
             ))}
           </section>
 
+          <section aria-labelledby="editorial-heading" className="mt-8 border-y border-line py-8">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+                  From the studio
+                </p>
+                <h3 id="editorial-heading" className="mt-2 text-2xl font-semibold tracking-tight">
+                  The week in operations
+                </h3>
+              </div>
+              <p className="max-w-md text-sm leading-6 text-muted">
+                A closer look at the signals, habits, and small decisions shaping a calmer backoffice.
+              </p>
+            </div>
+
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {[
+                {
+                  category: "Field notes",
+                  title: "Make every exception easier to see",
+                  detail: "Three practical ways to turn noisy order queues into useful next steps.",
+                  image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                  category: "Dispatch",
+                  title: "A more thoughtful daily handoff",
+                  detail: "The rituals that keep teams aligned when the pace picks up.",
+                  image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=80"
+                },
+                {
+                  category: "Perspective",
+                  title: "Small systems, better work",
+                  detail: "Why a clear source of truth creates room for better judgment.",
+                  image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80"
+                }
+              ].map((story) => (
+                <article key={story.title} className="group overflow-hidden rounded-lg border border-line bg-white">
+                  <div
+                    aria-hidden="true"
+                    className="h-40 bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
+                    style={{ backgroundImage: `url(${story.image})` }}
+                  />
+                  <div className="p-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-accent">
+                      {story.category}
+                    </p>
+                    <h4 className="mt-2 text-lg font-semibold leading-6">{story.title}</h4>
+                    <p className="mt-2 text-sm leading-6 text-muted">{story.detail}</p>
+                    <button className="mt-4 text-sm font-semibold text-ink underline decoration-line underline-offset-4 transition-colors hover:text-accent">
+                      Read story
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <section className="mt-6 grid gap-6 xl:grid-cols-[1fr_320px]">
             <OrderHistoryPanel
               orderFilters={dashboard.orderFilters}
